@@ -1,0 +1,19 @@
+# Package Files #
+*.jar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Intellij additional files
+*.iml
+*.idea
+out
+target
+# ignore all . files and . folders
+.*
+
+# Dont ignore .gitignore
+!/.gitignore
+!/*.css
+!/*.js
