@@ -73,46 +73,216 @@
 //console.log(obj.city);
 //
 
-/////////////////////////////////////////
-// Passing functions as arguments
-var years = [1990, 1965, 1937, 2005, 1998];
+///////////////////////////////////////////
+//// Passing functions as arguments
+//var years = [1990, 1965, 1937, 2005, 1998];
+//
+//// fn is a callback function
+//// is function called from another function
+//function arrayCalc(arr, fn) {
+//	var arrRes = [];
+//	for (var i = 0; i < arr.length; i++) {
+//		arrRes.push(fn(arr[i]));
+//	}
+//	return arrRes;
+//}
+//
+//function calculateAge(el) {
+//	return 2018 - el;
+//}
+//
+//function isAdult(el) {
+//	return el > 18;
+//}
+//
+//function maxHearRate(el) {
+//	if (el >= 18 && el <= 81) {
+//		return Math.round(206.9 - 0.67 * el);
+//	} else {
+//		return -1;
+//	}
+//}
+//
+//// we don't have () after calculateAge
+//// because we are not calling it now
+//// instead we call it later
+//var ages = arrayCalc(years, calculateAge);
+//var fullAges = arrayCalc(ages, isAdult);
+//var rates = arrayCalc(ages, maxHearRate);
+//
+//console.log(ages); // [28, 53, 81, 13, 20]
+//console.log(fullAges); // [true, true, true, false, true]
+//console.log(rates); // [188, 171, 153, -1, 194]
 
-// fn is a callback function
-// is function called from another function
-function arrayCalc(arr, fn) {
-	var arrRes = [];
-	for (var i = 0; i < arr.length; i++) {
-		arrRes.push(fn(arr[i]));
-	}
-	return arrRes;
-}
 
-function calculateAge(el) {
-	return 2018 - el;
-}
 
-function isAdult(el) {
-	return el > 18;
-}
 
-function maxHearRate(el) {
-	if (el >= 18 && el <= 81) {
-		return Math.round(206.9 - 0.67 * el);
-	} else {
-		return -1;
-	}
-}
+///////////////////////////////////////////
+//// Functions return functions
+//// returns objects that happen to be functions
+//function interviewQ(job) {
+//	if (job === 'designer') {
+//		// anonymous function here
+//		return function(name) {
+//			console.log(name + ', ' + 'Can you plz explain what UX is?');
+//		}
+//	} else if (job === 'teacher') {
+//		return function(name) {
+//			console.log(name + ', ' + 'What subject do you teach?');
+//		}
+//	} else {
+//		return function(name) {
+//			console.log('Hello, ' + name + 'what do you do?');
+//		}
+//	}
+//}
+//// just like store a function expression in a variable
+//var teacherQ = interviewQ('teacher');
+//teacherQ('John');
+//
+//var designerQ = interviewQ('designer');
+//designerQ('Jane');
+//
+//// can use functions right away
+//// don't need to store in a variable
+//interviewQ('teacher')('Tim'); // Tim, What subject do you teach?
 
-// we don't have () after calculateAge
-// because we are not calling it now
-// instead we call it later
-var ages = arrayCalc(years, calculateAge);
-var fullAges = arrayCalc(ages, isAdult);
-var rates = arrayCalc(ages, maxHearRate);
 
-console.log(ages); // [28, 53, 81, 13, 20]
-console.log(fullAges); // [true, true, true, false, true]
-console.log(rates); // [188, 171, 153, -1, 194]
+//////////////////////////////////////////
+//// IIFE: Immediately
+//function game() {
+//	var score = Math.random * 10;
+//	console.log(score >= 5);
+//}
+//
+//game();
+//
+//// (function(){}) is to tell the parser that this is an expression instead of a declaration
+//// because in JS, what inside a parenthesis cannot be a statement
+//// after that invoke the function using parenthesis();
+//(function() {
+//	var score = Math.random * 10;
+//	console.log(score >= 5);
+//})();
+//// outside the code, we cannot access score because of scope.
+//// By using IIFE, we have more data privacy, we created a new scope which we want to hide from the outside scope
+//
+//(function(word) {
+//	var score = Math.random * 10;
+//	console.log((score >= 5) + word);
+//})('Good Luck!');
+
+/////////////////////////////////////////////////
+//// Closure
+//function retire(retirementAge) {
+//	var a = 'years left until retirement'; 
+//	return function(yearOfBirth) {
+//		var age = 2018 - yearOfBirth;
+//		console.log(retirementAge - age + a);
+//	}
+//}
+//
+//var retireUS = retire(66);
+//retireUS(1993);
+//retire(66)(1993);
+//
+
+////////////////////////////////////////////////
+//// Bind, Call and Apply
+//
+//// Method Borrowing
+//// 1. call()
+//var john = {
+//	name: 'john',
+//	age: 26,
+//	job: 'teacher',
+//	presentation: function(style, timeOfDay) {
+//		if (style == 'formal') {
+//			console.log('Good ' + timeOfDay + '! Ladies and gentlemaen! I\'m a ' + this.job + ' and I\'m ' + this.age + ' years old.');
+//		} else if (style == 'friendly') {
+//			console.log('Hey! What\'s up? I\'m a ' + this.job + ' and I\'m ' + this.age + ' years old. Have a nice ' + timeOfDay + '.');
+//		}
+//	}
+//};
+//
+//// emily does not have presentation method for now
+//var emily = {
+//	name: 'Emily',
+//	age: 35,
+//	job: 'designer'
+//};
+//
+//john.presentation('formal', 'morning'); //Good morning! Ladies and gentlemaen! I'm a teacher and I'm 26 years old.
+//john.presentation.call(emily, 'friendly', 'afternoon'); //Hey! What's up? I'm a designer and I'm 35 years old. Have a nice afternoon.
+//
+//// 2. apply()
+////john.presentation.apply(emily, ['friendly', 'afternoon']); // will work after the presentation function changed to accept array as input
+//
+//// 3. bind()
+//// returns a function
+//// bind() allows us to preset some arguments
+//// this behavior is called carrying
+//var johnFriendly = john.presentation.bind(john, 'friendly');
+//johnFriendly('morning');// Hey! What's up? I'm a teacher and I'm 26 years old. Have a nice morning.
+
+//var years = [1990, 1965, 1937, 2005, 1998];
+//function arrayCalc(arr, fn) {
+//	var arrRes = [];
+//	for (var i = 0; i < arr.length; i++) {
+//		arrRes.push(fn(arr[i]));
+//	}
+//	return arrRes;
+//}
+//
+//function calculateAge(el) {
+//	return 2018 - el;
+//}
+//
+//function isAdult(limit, el) {
+//	return el > limit;
+//}
+//
+//// we don't have () after calculateAge
+//// because we are not calling it now
+//// instead we call it later
+//var ages = arrayCalc(years, calculateAge);
+//var fullAges = arrayCalc(ages, isAdult.bind(this, 20));
+//
+//console.log(ages); // [28, 53, 81, 13, 20]
+//console.log(fullAges); // [true, true, true, false, true]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
