@@ -1,0 +1,6 @@
+To serve the app, at the root of the app folder TicTacToe, run:
+	npm install
+then run:
+	npm start
+now the app is ready, you can navigate to:
+	localhost:3000/

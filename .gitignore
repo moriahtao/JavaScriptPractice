@@ -5,6 +5,9 @@
 *.tar.gz
 *.rar
 
+# ignore node/grunt dependency directories
+node_modules/
+
 # Intellij additional files
 *.iml
 *.idea

@@ -252,20 +252,65 @@
 //console.log(fullAges); // [true, true, true, false, true]
 
 
+//function Gorilla() {
+//	this.hasBanana = true;
+//	this.eat = notifyEating;
+//}
+//
+//var gorilla = new Gorilla();
+//gorilla.eat(3);
+//
+//function notifyEating(num) {
+//	if (this.hasBanana) {
+//		console.log(`This gorilla is eating ${num} bananas!`);
+//	}
+//}
 
 
+//function myMin(...arr) {
+//	return arr.reduce((cur, min) => {
+//		return cur < min ? cur : min;
+//	});
+//}
+//
+//console.log(myMin(3, -2, 4, 1, -99 , 4, 0));
 
 
+//var a = [2,3, 8, 9,-1];
+//console.log(Math.max(...a));
 
 
+//let a = [2, 3];
+//let b = [...a, ...a];
+//console.log(b);
+//a = [4, 5];
+//console.log(b);
 
+//let obj1 = { a: 0 , b: { c: 0}};
+//  let obj2 = Object.assign({}, obj1);
+//  console.log(JSON.stringify(obj2)); 
 
+//let obj1 = { a: 0 , b: { c: 0}};
+//let obj2 = Object.assign({}, obj1);
+//obj2.b.c = 3;
+//console.log(JSON.stringify(obj1)); // { a: 1, b: { c: 3}}
+//console.log(JSON.stringify(obj2)); // { a: 2, b: { c: 3}}
 
+var foo = 1;
+function bar() {
+	foo = 10;
+	return;
+	function foo() {}
+	
+}
 
+bar();
+console.log(foo);
 
-
-
-
+var a = 1;
+(function baz() {
+	console.log(`a = ${a}`);	
+})();
 
 
 

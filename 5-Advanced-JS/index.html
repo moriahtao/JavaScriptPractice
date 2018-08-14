@@ -3,10 +3,71 @@
     <head>
         <meta charset="UTF-8">
         <title>Section 5: Advanced JavaScript: Objects and Functions</title>
+		<link href="style.css" rel="stylesheet" type="text/css">
     </head>
 
     <body>
         <h1>Section 5: Advanced JavaScript: Objects and Functions</h1>
         <script src="script.js"></script>
+		<div id='container'>
+  			<div>
+				RandomText1
+				<div>
+				  RandomText2
+				  <ul>
+					<li>RandomText3</li>
+				  </ul>
+				</div>
+			</div>
+			<button id="replace">Replace</button>
+		</div>
+		
+			<div class="left-one">
+				<p>
+					We don't limit your creativity, which means you can order whatever you feel like. You can also choose from our menu containing over 100 delicious meals. It's up to you!
+				</p>		
+			</div>
+	
+			<div class="left-one">
+				<p>
+					We don't limit your creativity!
+				</p>
+			</div>
+		
+		
+		<!--<button>Click!</button>
+		
+		
+		<script>
+		const counter = {
+			cnt: 0,
+			
+			inc: function() {
+				this.cnt++;
+				console.log(this.cnt);
+			}
+		}
+		const button = document.getElementsByTagName('button')[0];
+		button.addEventListener('click', counter.inc.bind(counter), false);
+		button.a
+		</script>-->
+		
+		<script>
+		var newText = 'hello world';
+		function replaceTextNodes(node) {
+		  node.childNodes.forEach(function(el) {
+			if (el.nodeType === 3) {  // If this is a text node, replace the text
+			  if (el.nodeValue.trim() !== "") { // Ignore this node it it an empty text node
+				el.nodeValue = newText;
+			  }
+			} else { // Else recurse on this node
+			  replaceTextNodes(el);
+			}
+		  });
+		}
+
+		var onClick = replaceTextNodes.bind(null, document.querySelector('#container'));
+		document.querySelector('#replace').addEventListener('click', onClick);
+		</script>
     </body>
 </html>
